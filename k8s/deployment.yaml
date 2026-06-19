@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cicd-k8s-monitoring-app
+  labels:
+    app: cicd-k8s-monitoring-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cicd-k8s-monitoring-app
+  template:
+    metadata:
+      labels:
+        app: cicd-k8s-monitoring-app
+    spec:
+      containers:
+        - name: cicd-k8s-monitoring-app
+          image: nilesh248004/cicd-k8s-monitoring-app:latest
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: cicd-app-config
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 20

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cicd-app-config
+data:
+  APP_NAME: "CI/CD Kubernetes Monitoring App"
+  PORT: "3000"
