@@ -1,0 +1,14 @@
+{
+  "name": "cicd-k8s-monitoring-app",
+  "version": "1.0.0",
+  "description": "Simple web app for CI/CD, Kubernetes and monitoring project",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "express": "^4.18.3",
+    "prom-client": "^15.1.0"
+  }
+}

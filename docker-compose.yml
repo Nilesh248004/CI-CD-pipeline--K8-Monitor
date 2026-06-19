@@ -1,0 +1,9 @@
+services:
+  web:
+    build: .
+    container_name: cicd-k8s-monitoring-app
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - APP_NAME=CI/CD Kubernetes Monitoring App
