@@ -4,6 +4,10 @@ metadata:
   name: cicd-k8s-monitoring-service
   labels:
     app: cicd-k8s-monitoring-app
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: "/metrics"
+    prometheus.io/port: "80"
 spec:
   type: NodePort
   selector:

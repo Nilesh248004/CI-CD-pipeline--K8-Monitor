@@ -1,0 +1,21 @@
+groups:
+  - name: cicd-k8s-monitoring-app
+    rules:
+      - alert: AppDown
+        expr: up{app="cicd-k8s-monitoring-app"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "CI/CD Kubernetes Monitoring App is down"
+          description: "Prometheus has not been able to scrape the app for at least 1 minute."
+
+      - alert: HighHttp5xxRate
+        expr: sum(rate(http_requests_total{app="cicd-k8s-monitoring-app",status_code=~"5.."}[5m])) > 0
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "5xx responses detected"
+          description: "The app has returned HTTP 5xx responses during the last 5 minutes."
+
